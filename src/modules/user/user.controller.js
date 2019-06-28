@@ -1,10 +1,10 @@
 import HTTPStatus from 'http-status';
-import sequelize from 'sequelize';
+// import sequelize from 'sequelize';
 import User from './user.model';
 
 
 export const getUser = async (req, res) => {
-  const user = await User.findById(id);
+  const user = await User.findById(req.params.id);
   if (!user) {
     res.sendStatus(HTTPStatus.NOT_FOUND);
     return;
@@ -18,13 +18,14 @@ export const register = async (req, res, next) => {
     const user = await User.create({
       name: req.body.name,
       password: req.body.password,
-      email: invite.email,
+      email: req.body.email,
     });
 
     const u = user.auth();
     return res.status(HTTPStatus.CREATED).json(u);
   } catch (ex) {
-    if (err) next(err);
+    if (ex) next(ex);
+    return res.send(ex);
   }
 };
 
@@ -39,8 +40,8 @@ export const login = async (req, res, next) => {
     const u = user.auth();
 
     return res.json(u);
-  } catch (ex) {
+  } catch (err) {
     if (err) next(err);
+    return res.send(err);
   }
 };
-
