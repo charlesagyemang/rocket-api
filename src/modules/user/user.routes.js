@@ -6,7 +6,7 @@ import { authJwt } from '../../config/passport';
 
 const UserRouter = Router();
 
-UserRouter.post('/', validate(v.register), c.register);
+UserRouter.post('/register', validate(v.register), c.register);
 UserRouter.get('/:id', authJwt, c.getUser);
 UserRouter.post('/login', validate(v.login), c.login);
 

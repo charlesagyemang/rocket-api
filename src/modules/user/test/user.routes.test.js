@@ -10,7 +10,7 @@ describe('User::Routes', async () => {
   });
 
   it.only('should login successfully', async () => {
-    await request(server).post('/api/users/').send({
+    await request(server).post('/api/users/register/').send({
       name: 'name',
       email: 'test@email.com',
       password: 'password',
