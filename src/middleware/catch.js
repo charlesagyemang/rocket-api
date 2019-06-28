@@ -2,7 +2,7 @@ import HTTPStatus from 'http-status';
 
 
 const errors = (app) => {
-  app.use((err, req, res, next) => {
+  app.use((err, req, res) => {
     res.status(err.status || HTTPStatus.INTERNAL_SERVER_ERROR)
           .json({ ...err });
   });
